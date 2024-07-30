@@ -2,6 +2,7 @@
 
 ## npm scrpits
 
-### code formating  using prettier
+### code formating using prettier
+
 This projects using prettier
 format all files : `npm run format`
