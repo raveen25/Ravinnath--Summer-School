@@ -26,6 +26,7 @@ jobs:
         command: npm run cypress-run
     - name: upload report and screenshots
       uses: actions/upload-artifact@v4.3.4
+      if: always()
       with:
          name: report
          path: ./mochawsome-report
