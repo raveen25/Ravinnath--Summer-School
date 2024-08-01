@@ -32,7 +32,7 @@ describe("Login Functionality", () => {
   });*/
 
 
-  import Login from '../../pageElemants/Login';
+import Login from '../../pageElemants/Login';
 import Global from '../../pageElemants/Global';
 import Homepage from '../../pageElemants/Homepage';
 
