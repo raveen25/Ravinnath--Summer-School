@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.7
       - name: Run all cypress tests
-        uses: cypress.io/github-action@v6.5.0
+        uses: cypress-io/github-action@v6.5.0
         env:
           CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
         with:
