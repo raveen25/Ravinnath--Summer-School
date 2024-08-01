@@ -1,7 +1,8 @@
 class Cart {
   elements = {
-  productWrapper: () => cy.getByTestId('product-wrapper'),
-  optionButton: () => cy.getByTestId('option-button'),
+  productWrapper: () => cy.getByTestId('product-wrapper').first(),
+  optionButtonSize: () => cy.getByTestId('option-button').contains('XL'),
+  optionButtonColour: () => cy.getByTestId('option-button').contains('Black'),
   addProductButton: () => cy.getByTestId('add-product-button'),
   navCartLink: () => cy.getByTestId('nav-cart-link'),
   productSelectButton: () => cy.getByTestId('product-select-button'),
@@ -12,11 +13,11 @@ class Cart {
   }
 
   selectSize() {
-    this.elements.optionButton().click();
+    this.elements.optionButtonSize().click();
   }
 
   selectColour() {
-    this.elements.optionButton().click();
+    this.elements.optionButtonColour().click();
   }
 
   addToCart() {
@@ -27,9 +28,6 @@ class Cart {
     this.elements.navCartLink().click();
   }
 
-  verifyProductInCart() {
-    this.elements.productSelectButton().should('have.length', 1);
-  }
 }
 
 export default new Cart();

@@ -1,38 +1,22 @@
 import Login from "../pageElements/Login";
-import HomePage from "../pageElements/HomePage";
-import checkout from "../pageElements/checkout";
 
-// Cypress.Commands.add("getByTestId", (id) => {
-//  cy.get(`[data-testid=${id}]`);
-// });
+// Adding a custom Cypress command to get elements by their data-testid attribute
 Cypress.Commands.add("getByTestId", (id) => {
   cy.get(`[data-testid="${id}"]`,{timeout: 10000});
 });
-
+// Adding a custom Cypress command for logging in
 Cypress.Commands.add("Login", (username, password) => {
-  //cy.session([username, password], () => {
-
+  cy.session([username, password], () => {
     cy.visit("/");
+    cy.url().should('include', '/sign-in')
     cy.contains("h1", "Welcome back");
-    Login.elements.emailInput().type(username);
+    Login.elements.emailInput().type(username, {delay: 100});
     Login.elements.passwordInput().type(password);
     Login.elements.signInButton().click();
-    //Homepage.elements.storeExclence().should("be.visible");
-  //});
- 
+    cy.getByTestId('nav-store-link').should('be.visible');
+  })
 });
 
 
 
-// import Login from "../../pageElements/Login";
-
-// Cypress.Commands.add("getByTestId", (id) => {
-//   cy.get(`[data-testid="${id}"]`, { timeout: 10000 });
-// });
-
-// Cypress.Commands.add("login", (username, password) => {
-//   cy.visit("/");
-//   cy.contains("h1", "Welcome back");
-//   Login.login(username, password);
-// });
 

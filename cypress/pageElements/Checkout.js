@@ -1,17 +1,3 @@
-// cypress/pageElemants/checkout.js
-/*class checkout {
-  elements = {
-    delivaryOptionRadio: () => cy.getByTestID("delivery-option-radio"),
-    continueToReview: () => cy.getByTestID("continue-to-review"),
-    submitOrderButton: () => cy.getByTestID("submit-order-button"),
-    
-  };
-}
-
-
-export default checkout;*/
-
-
 
 class Checkout {
   elements = {
@@ -30,22 +16,7 @@ class Checkout {
     orderCompleteContainer: () => cy.getByTestId("order-complete-container"),
   };
 
-  fillShippingDetails(firstName, lastName, address, postalCode, city, country) {
-    this.elements.shippingFirstNameInput().type(firstName);
-    this.elements.shippingLastNameInput().type(lastName);
-    this.elements.shippingAddressInput().type(address);
-    this.elements.shippingPostalCodeInput().type(postalCode);
-    this.elements.shippingCityInput().type(city);
-    this.elements.shippingCountrySelect().select(country);
-  }
 
-  selectDeliveryOption(option) {
-    this.elements.deliveryOptionRadio().contains(option).click();
-  }
-
-  verifyOrderSuccess() {
-    this.elements.orderCompleteContainer().contains('Your order was placed successfully.');
-  }
 }
 
 export default new Checkout();

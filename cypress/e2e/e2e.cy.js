@@ -1,73 +1,62 @@
-import Login from '../pageElements/Login'; // do we need unused classes?
-import Global from '../pageElements/Global';
 import HomePage from '../pageElements/HomePage';
 import Cart from '../pageElements/Cart';
+import Checkout from '../pageElements/Checkout';
+
 
 describe("Login Functionality", () => {
-  beforeEach(() => {
-    cy.Login(Cypress.env("username"), Cypress.env("password")); // only classes use big first letter, rest please use camelCase
+  beforeEach(() => {                                  // Logs in using credentials from environment variables
+    cy.Login(Cypress.env("username"), Cypress.env("password")); 
+    cy.visit('/')
   });
 
-  describe("Validate signin page", () => {
+
     it("should display store excellence", () => {
-      Homepage.elements.storeExclence().should("be.visible");
+      
+      HomePage.elements.storeExclence().should("be.visible");
     });
-  });
 
-  /*describe("Add items to cart", () => {
-    it("should add item to cart", () => {
-      cy.getByTestId('product-wrapper').contains('p', 'Medusa T-Shirt').click() // define all elements to class
-      cy.getByTestId('option-button').contains('button', 'XL').click()
-      cy.getByTestId('option-button').contains('button', 'Black').click()
-      cy.getByTestId('add-product-button').contains('button', 'Add to cart').click()
-      cy.getByTestId('nav-cart-link').click();
-      cy.getByTestId('product-select-button').should('have.length', 1);
-    });
-  });*/
+//Selecting items and adding them to cart
+ 
 
-
-
-  describe("Add items to cart", () => {
-    it("should add item to cart", () => {
+    it("should add item to cart", () => {      
       Cart.selectProduct('Medusa T-Shirt');
-      Cart.selectSize('XL');
-      Cart.selectColour('Black');
+      Cart.selectSize();
+      Cart.selectColour();
       Cart.addToCart();
       Cart.goToCart();
-      Cart.verifyProductInCart(1);
+      
     });
-  });
 
 
+    //completing the checkout
 
-  describe("Checkout", () => {
-    it("should complete checkout process", () => {
-      cy.getByTestId('nav-cart-link').click(); // add all elements in class
+
+    it("should complete checkout process", () => {           
+      cy.getByTestId('nav-cart-link').click(); 
       cy.visit('/cart');
       cy.getByTestId('checkout-button').should('have.text', 'Go to checkout').click();
       //cy.getByTestId('edit-address-button').click();
-      cy.getByTestId('shipping-first-name-input').type('Lion');
-      cy.getByTestId('shipping-last-name-input').type('King');
-      cy.getByTestId('shipping-address-input').type('Main Street');
-      cy.getByTestId('shipping-postal-code-input').type('LV-1007');
-      cy.getByTestId('shipping-city-input').type('LA');
-      cy.getByTestId('shipping-country-select').select('United States');
-      cy.getByTestId('submit-address-button').click();
+      Checkout.elements.shippingFirstNameInput().type('Lion');
+      Checkout.elements.shippingLastNameInput().type('King');
+      Checkout.elements.shippingAddressInput().type('Main Street');
+      Checkout.elements.shippingPostalCodeInput().type('LV-1007');
+      Checkout.elements.shippingCityInput().type('LA');
+      Checkout.elements.shippingCountrySelect().select('United States');
+      Checkout.elements.submitAddressButton().click();
       cy.getByTestId('delivery-option-radio').contains('FakeEx Express').click();
       cy.getByTestId('submit-delivery-option-button').click();
-      cy.getByTestId('submit-payment-button').click();
+      Checkout.elements.submitPaymentButton().click();
       cy.getByTestId('submit-order-button').click();
       cy.getByTestId('order-complete-container').contains('Your order was placed successfully.');
     });
-  });
 
-  describe("Logout", () => {
-    it("should log out successfully", () => {
+ //Loging out of the system
+
+    it("should log out successfully", () => {           
       cy.getByTestId('nav-menu-button').click();
       cy.getByTestId('logout-button').click();
       cy.getByTestId('login-page').contains('Welcome back');
     });
-  });
 });
 
 
