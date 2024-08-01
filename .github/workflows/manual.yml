@@ -4,7 +4,7 @@ name: Manual workflow
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on:[push, workflow_dispatch]
+on: [push, workflow_dispatch]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,15 +18,15 @@ jobs:
     # Runs a single command using the runners shell
     - name: Checkout
       uses: actions/checkout@v4.1.7
-     -name: Run all cypress tests
+    - name: Run all cypress tests
       uses: cypress.io/github-actions@6.5.0
       env:
         cypress_password: ${{ secrets.CYPPRESS_PASSWORD }}
       with:
         install: true
-        command:npm run cypress-run
-      -name: upload report and screenshots
-       uses: actions/upload-artifact@v4.3.4
-       with:
+        command: npm run cypress-run
+    - name: upload report and screenshots
+      uses: actions/upload-artifact@v4.3.4
+      with:
          name: report
          path: ./mochawsome-report
