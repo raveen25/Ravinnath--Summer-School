@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  reporter: 'mochawsome',
+  reporter: 'mochawesome',
   reporterOptions: {
     overwrite: false
   },
