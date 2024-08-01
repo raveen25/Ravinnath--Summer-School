@@ -10,23 +10,23 @@ on: [push, workflow_dispatch]
 jobs:
   # This workflow contains a single job called "greet"
   cypress-run:
-   runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest  
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-   steps:
+    steps:
     # Runs a single command using the runners shell
-    - name: Checkout
-      uses: actions/checkout@v4.1.7
-    - name: Run all cypress tests
-      uses: cypress.io/github-actions@6.5.0
-      env:
-        CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
-      with:
-        install: true
-        command: npm run cypress-run
-    - name: upload report and screenshots
-      uses: actions/upload-artifact@v4.3.4
-      if: always()
-      with:
-         name: report
-         path: ./mochawsome-report
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+      - name: Run all cypress tests
+        uses: cypress.io/github-actions@6.5.0
+        env:
+          CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
+        with:
+          install: true
+          command: npm run cypress-run
+      - name: upload report and screenshots
+        uses: actions/upload-artifact@v4.3.4
+        if: always()
+        with:
+            name: report
+            path: ./mochawsome-report
